@@ -35,11 +35,10 @@ const CreateBlog = () => {
 
         // Append text data
         formData.append("title", data.title);
-        formData.append("short_description", data.short_description || ""); // Optional
-        formData.append("description", html); // Add the description (from editor)
+        formData.append("short_description", data.short_description || ""); 
+        formData.append("description", html); 
         formData.append("author", data.author);
       
-        // Append the selected image file
         if (image) {
           formData.append("image", image);
         }

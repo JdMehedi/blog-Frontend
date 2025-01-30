@@ -48,47 +48,37 @@ const EditBlog = () => {
         setHtml(e.target.value); 
       }
 
-      const onSubmitData = async(data)=>{
-        // const newdata = {...data, "description":html}
-        // console.log(newdata);
-        // const formData = new FormData();
-
-        // Append text data
+      const onSubmitData = async (data) => {
+        const formData = new FormData();
+    
         formData.append("title", data.title);
-        formData.append("short_description", data.short_description || ""); // Optional
-        formData.append("description", html); // Add the description (from editor)
+        formData.append("short_description", data.short_description);
+        formData.append("description", html);
         formData.append("author", data.author);
-        // formData.append("id", params.id);
-        // console.log("Data from form:", data);
-        // console.log("Description (HTML):", html);
-        // console.log("Selected image:", image);
-        for (const [key, value] of formData.entries()) {
-          console.log(`${key}:`, value);
-      }
-        
-        // Append the selected image file
+        formData.append("_method", "PUT");
+    
         if (image) {
-          formData.append("image", image);
+            formData.append("image", image);
         }
+        console.log(12,data,formData)
         try {
-            const response = await axios.put(
-              `http://localhost:8000/update/blog?id=${params.id}`, 
-              formData,
-              {
-                headers: {
-                  "Content-Type": "multipart/form-data",
-                },
-              }
-              
+            const response = await axios.post(
+                `http://localhost:8000/update/blog?id=${params.id}`,
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
             );
             toast(response.data.message);
             navigate("/");
-          } catch (error) {
-            console.error("Error adding blog:", error);
-          }
-
-
-      }
+        } catch (error) {
+            console.error("Error updating blog:", error.response?.data || error.message);
+            toast.error("Failed to update blog.");
+        }
+    };
+    
     return (
         <div className="container">
         <div className="d-flex justify-content-between pt-4">
