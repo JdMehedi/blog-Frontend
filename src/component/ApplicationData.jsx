@@ -16,7 +16,6 @@ const ApplicationData = () => {
 
         const processingData = await fetchData(CONFIG.APP_API_URL, token, { type: "0" });
         const requestedData = await fetchData(CONFIG.APP_API_URL, token, { type: "1" });
-
         setProcessingData(processingData.data);
         setRequestedData(requestedData.data);
       } catch (err) {
