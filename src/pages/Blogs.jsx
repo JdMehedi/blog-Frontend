@@ -21,6 +21,11 @@ const Blogs = () => {
     return (
         <div>
             <div className="container">
+                <div className="pt-4">
+                   <input type="button" value="Search" ></input>
+                   <a href="/emonitoring/list" className='btn btn-success m-4'>Irms testing data</a>
+
+                </div>
                 <div className="d-flex justify-content-between pt-4">
                     <h3>Blog</h3>
                     <a href="/create/blog" className='btn btn-dark'>Create</a>
